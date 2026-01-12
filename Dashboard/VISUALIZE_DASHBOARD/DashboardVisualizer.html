@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="DashboardVisualizer.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <h1>Dashboard</h1>
+  </div>
+
+  <div class="container">
+
+    <!-- DataCards -->
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">Temperature</div>
+        <div class="card-value" id="tempValue">-- °C</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Humidity</div>
+        <div class="card-value" id="humValue">-- %</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Light</div>
+        <div class="card-value" id="lightValue">-- lx</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Motion</div>
+        <div class="card-value" id="motionValue">--</div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts">
+      <div class="chart-card">
+        <canvas id="tempChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <canvas id="humChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Button Panel -->
+    <div class="controls">
+      <div class="label-buttons">
+        <button class="btn" id="refreshBtn">Refresh Data</button>
+        <button class="btn" id="toggleBtn">Toggle Something</button>
+      </div>
+    </div>
+
+    <!-- Logger -->
+    <div class="log">
+      <div class="card-title">Recent Events</div>
+      <pre class="log-area" id="logArea"></pre>
+    </div>
+
+  </div>
+
+  <script type="module">
+    // --- ChartManager ---
+    import { makeChart, pushTrim } from "./ChartManager/ChartManager.js";
+    import { COLORS } from "./ChartManager/config.js";
+
+    const tempChart = makeChart(document.getElementById("tempChart").getContext("2d"), "Temperature", COLORS.TEMP);
+    const humChart = makeChart(document.getElementById("humChart").getContext("2d"), "Humidity", COLORS.HUM);
+
+    // --- DataFetcher ---
+    import { fetchData } from "./DataFetcher/DataFetcher.js";
+
+    // --- Logger ---
+    import { addLog } from "./Logger/Logger.js";
+    const logEl = document.getElementById("logArea");
+
+    async function updateDashboard() {
+      const data = await fetchData();
+
+      // Update DataCards
+      document.getElementById("tempValue").innerText = data.temp + " °C";
+      document.getElementById("humValue").innerText = data.hum + " %";
+      document.getElementById("lightValue").innerText = data.light + " lx";
+      document.getElementById("motionValue").innerText = data.motion ? "Yes" : "No";
+
+      // Update Charts
+      const now = new Date().toLocaleTimeString();
+      pushTrim(tempChart, now, data.temp);
+      pushTrim(humChart, now, data.hum);
+
+      // Log the update
+      addLog(logEl, "Data updated");
+    }
+
+    // --- ButtonPanel ---
+    document.getElementById("refreshBtn").onclick = () => updateDashboard();
+    document.getElementById("toggleBtn").onclick = () => addLog(logEl, "Button clicked");
+
+    // Initial load
+    updateDashboard();
+    setInterval(updateDashboard, 5000); // refresh every 5s
+
+  </script>
+
+</body>
+</html>

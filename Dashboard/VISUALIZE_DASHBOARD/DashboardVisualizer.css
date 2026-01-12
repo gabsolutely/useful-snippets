@@ -1,0 +1,151 @@
+/* /dashboard.css - alternative styling for the dashboard */
+
+:root {
+  --bg: #101828;
+  --card: #1e293b;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --ok: #22c55e;
+  --danger: #ef4444;
+  --glass: rgba(255, 255, 255, 0.05);
+  --pad: 16px;
+  --radius: 12px;
+  --text: #f1f5f9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: "Inter", system-ui, Segoe UI, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Top Bar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+/* Buttons */
+.btn {
+  background: var(--card);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn:hover { opacity: 0.9; }
+.btn.danger { background: var(--danger); }
+
+/* Layouts */
+.container {
+  display: grid;
+  gap: 14px;
+}
+
+.cards {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Cards / DataCards */
+.card, .chart-card, .controls, .log {
+  background: var(--card);
+  border-radius: var(--radius);
+}
+
+.card {
+  padding: var(--pad);
+  min-width: 160px;
+  flex: 1;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.card-title {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.card-value {
+  font-size: 20px;
+  margin-top: 6px;
+}
+
+.card-sub {
+  font-size: 12px;
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+/* Charts */
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.chart-card {
+  padding: 14px;
+  min-height: 180px;
+}
+
+.chart-card.small {
+  min-height: 110px;
+}
+
+/* Controls (Button Panel) */
+.controls { padding: 14px; }
+
+.label-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* Logs */
+.log { padding: 14px; }
+
+.log-area {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 12px;
+  border-radius: var(--radius);
+  background: var(--glass);
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .charts { grid-template-columns: 1fr; }
+  .cards { flex-direction: column; }
+}
+
+/* Canvas adjustments */
+canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chartjs-render-monitor {
+  stroke: initial !important;
+  color: initial !important;
+}
