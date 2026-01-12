@@ -23,4 +23,4 @@ Threshold_Automation::init();
 
 ```
 
-# Example snippets are provided.
+## Example snippets are provided.

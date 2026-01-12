@@ -25,4 +25,4 @@ AnomalyDetector::init(ANOMALY_BUFFER_SIZE); // uses default buffer size from con
 
 ```
 
-# Example snippets are provided.
+## Example snippets are provided.

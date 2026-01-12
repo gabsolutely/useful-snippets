@@ -23,4 +23,4 @@ ActivityRecognizer recognizer(ACTIVITY_WINDOW_SIZE);
 
 ```
 
-# Example snippets are provided.
+## Example snippets are provided.

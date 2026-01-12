@@ -25,4 +25,4 @@ Predictor::init();  // uses default window size from config.h
 
 ```
 
-# Example snippets are provided.
+## Example snippets are provided.
