@@ -1,5 +1,5 @@
 # ConstraintsPatch
-- A Python script to automatically patch C code by moving local stack arrays to global scope, useful for fixing ESP32 memory constraints in embedded AI models.
+- A Python script to automatically patch C code by moving local stack arrays to global scope, useful for fixing ESP32 memory constraints in embedded AI models. (This file is interchangeable with Automation and other miscs.)
 
 ## Files
  - `constraints_patch.py` — main patching script
@@ -25,5 +25,6 @@ Or import as a module: (Can be appended to converter.py)
 from constraints_patch import apply_constraints_patch
 apply_constraints_patch("model.c")
 ```
+
 
 ## An example.c file for testing/demo is provided.
