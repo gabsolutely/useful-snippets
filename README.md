@@ -7,6 +7,7 @@ A collection of reusable and practical code snippets from my past projects, main
 - [Dashboard/](./Dashboard) – Web dashboard, charts, and data display examples
 - Cloud/ – Backend examples, API calls, logging to cloud.
 - [Data/](./Data) – Logging, CSV handling, and sensor data processing.
+- [Security/](./Security)
 - Misc/ – Other miscellaneous snippets for specific purposes.
 
 ## Usage
